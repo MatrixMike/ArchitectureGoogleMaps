@@ -5,10 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import com.example.danielslone.architecturegooglemaps.R
-import com.example.danielslone.architecturegooglemaps.domain.bike.model.Network
 import com.example.danielslone.architecturegooglemaps.presentation.bike.adapter.model.CityInformationItem
 import kotlinx.android.synthetic.main.item_city_bike_info.view.*
 
@@ -18,7 +16,7 @@ import kotlinx.android.synthetic.main.item_city_bike_info.view.*
 class GoogleMapsAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     private companion object {
-        const val VIEW_TYPE_TEXT = 0
+        const val VIEW_TYPE_CITY = 0
     }
 
     // region Adapter
@@ -27,7 +25,7 @@ class GoogleMapsAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
     var cityInformationRows: List<CityInformationItem> = listOf()
 
     override fun getItemViewType(position: Int): Int {
-        return VIEW_TYPE_TEXT
+        return VIEW_TYPE_CITY
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -42,7 +40,7 @@ class GoogleMapsAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vi
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
-            VIEW_TYPE_TEXT -> CityInformationItemViewHolder(layoutInflater.inflate(R.layout.item_city_bike_info, parent, false))
+            VIEW_TYPE_CITY -> CityInformationItemViewHolder(layoutInflater.inflate(R.layout.item_city_bike_info, parent, false))
             else -> throw IllegalArgumentException()
         }
     }

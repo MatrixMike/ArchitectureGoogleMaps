@@ -2,9 +2,9 @@ package com.example.danielslone.architecturegooglemaps.data.bike.service
 
 import android.util.Log
 import com.example.danielslone.architecturegooglemaps.data.bike.mapper.mapToNetworks
-import com.example.danielslone.architecturegooglemaps.data.bike.model.CityResponse
+import com.example.danielslone.architecturegooglemaps.data.bike.model.BikeShareCityResponse
 import com.example.danielslone.architecturegooglemaps.domain.bike.repository.BikeRepository
-import com.example.danielslone.architecturegooglemaps.domain.bike.model.Network
+import com.example.danielslone.architecturegooglemaps.domain.bike.model.BikeShareCity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,9 +23,9 @@ class BikeService @Inject constructor(retrofit: Retrofit) : BikeRepository {
         client = retrofit.create(BikeClient::class.java)
     }
 
-    override fun getNetworks(): Single<List<Network>> {
+    override fun getBikeShareCities(): Single<List<BikeShareCity>> {
         Log.d("bike service", "bike service")
-        return client.getNetworks()
+        return client.getBikeShareCities()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .map { mapToNetworks(it) }
@@ -35,6 +35,6 @@ class BikeService @Inject constructor(retrofit: Retrofit) : BikeRepository {
     private interface BikeClient {
 
         @GET("networks")
-        fun getNetworks(): Single<CityResponse>
+        fun getBikeShareCities(): Single<BikeShareCityResponse>
     }
 }

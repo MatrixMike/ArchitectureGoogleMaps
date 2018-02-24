@@ -8,7 +8,6 @@ import com.example.danielslone.architecturegooglemaps.application.BaseActivity
 import com.example.danielslone.architecturegooglemaps.application.injection.component.ActivityComponent
 import com.example.danielslone.architecturegooglemaps.presentation.bike.adapter.GoogleMapsAdapter
 import com.example.danielslone.architecturegooglemaps.presentation.bike.adapter.model.CityInformationItem
-import com.example.danielslone.architecturegooglemaps.presentation.bike.model.NetworkItem
 import com.example.danielslone.architecturegooglemaps.presentation.bike.presenter.GoogleMapPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject

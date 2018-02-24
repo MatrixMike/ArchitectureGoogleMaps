@@ -1,22 +1,18 @@
 package com.example.danielslone.architecturegooglemaps.presentation.bike.presenter
 
-import android.util.Log
-import com.example.danielslone.architecturegooglemaps.domain.bike.model.Network
+import com.example.danielslone.architecturegooglemaps.domain.bike.model.BikeShareCity
 import com.example.danielslone.architecturegooglemaps.application.Presenter
-import com.example.danielslone.architecturegooglemaps.domain.bike.usecase.GetNetworksUseCase
+import com.example.danielslone.architecturegooglemaps.domain.bike.usecase.GetBikeShareCitiesUseCase
 import com.example.danielslone.architecturegooglemaps.presentation.bike.adapter.model.CityInformationItem
-import com.example.danielslone.architecturegooglemaps.presentation.bike.model.NetworkItem
-import io.reactivex.Single
 import javax.inject.Inject
 
 /**
  * Created by danielslone on 2/23/18.
  */
-class GoogleMapPresenter @Inject constructor(private val networksUseCase: GetNetworksUseCase) : Presenter {
+class GoogleMapPresenter @Inject constructor(private val networksUseCase: GetBikeShareCitiesUseCase) : Presenter {
 
     private lateinit var display: Display
     private lateinit var router: Router
-//    private var networksObservable: Single<List<Network>>? = null
 
     // region Interfaces
     interface Display {
@@ -46,13 +42,13 @@ class GoogleMapPresenter @Inject constructor(private val networksUseCase: GetNet
     }
 
     private fun getNetworks() {
-        networksUseCase.getNetworks()
+        networksUseCase.getBikeShareCities()
                 .map { createNetworkList(it) }
                 .subscribe({ onNetworksSuccess(it) }, {  onNetworksFailure(it) })
     }
 
-    private fun createNetworkList(networks: List<Network>): List<CityInformationItem> =
-            networks.map {
+    private fun createNetworkList(bikeShareCities: List<BikeShareCity>): List<CityInformationItem> =
+            bikeShareCities.map {
                 CityInformationItem(it.name,
                                     it.location.city + ", " + it.location.country)
             }
@@ -64,5 +60,4 @@ class GoogleMapPresenter @Inject constructor(private val networksUseCase: GetNet
     private fun onNetworksFailure(throwable: Throwable) {
 
     }
-
 }
