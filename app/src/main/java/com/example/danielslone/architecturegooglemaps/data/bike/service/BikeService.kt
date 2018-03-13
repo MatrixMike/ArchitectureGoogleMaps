@@ -2,9 +2,9 @@ package com.example.danielslone.architecturegooglemaps.data.bike.service
 
 import android.util.Log
 import com.example.danielslone.architecturegooglemaps.data.bike.mapper.mapToNetworks
-import com.example.danielslone.architecturegooglemaps.data.bike.model.CityResponse
+import com.example.danielslone.architecturegooglemaps.data.bike.model.BikeShareCityResponse
 import com.example.danielslone.architecturegooglemaps.domain.bike.repository.BikeRepository
-import com.example.danielslone.architecturegooglemaps.domain.bike.model.Network
+import com.example.danielslone.architecturegooglemaps.domain.bike.model.BikeShareCity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,24 +17,27 @@ import javax.inject.Inject
  */
 class BikeService @Inject constructor(retrofit: Retrofit) : BikeRepository {
 
+    private companion object {
+        val FILE_NAME = "BikeService"
+    }
+
     private val client: BikeClient
 
     init {
         client = retrofit.create(BikeClient::class.java)
     }
 
-    override fun getNetworks(): Single<List<Network>> {
-        Log.d("bike service", "bike service")
-        return client.getNetworks()
+    override fun getBikeShareCities(): Single<List<BikeShareCity>> {
+        return client.getBikeShareCities()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .map { mapToNetworks(it) }
-                .doOnError{ Log.d("bike service", it.message.toString()) }
+                .doOnError{ Log.d(FILE_NAME, it.message.toString()) }
     }
 
     private interface BikeClient {
 
         @GET("networks")
-        fun getNetworks(): Single<CityResponse>
+        fun getBikeShareCities(): Single<BikeShareCityResponse>
     }
 }

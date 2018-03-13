@@ -4,7 +4,6 @@ import com.example.danielslone.architecturegooglemaps.data.bike.service.BikeServ
 import com.example.danielslone.architecturegooglemaps.domain.bike.repository.BikeRepository
 import dagger.Module
 import dagger.Provides
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -17,12 +16,13 @@ class BikeModule {
 
     private companion object {
         const val BIKE_RETROFIT = "BIKE_RETROFIT"
+        const val BASE_URL = "https://api.citybik.es/v2/"
     }
 
     @Provides
     @Singleton
     @Named(BIKE_RETROFIT)
-    fun provideBikeRetrofit(retrofitBuilder: Retrofit.Builder): Retrofit = retrofitBuilder.baseUrl("https://api.citybik.es/v2/").build()
+    fun provideBikeRetrofit(retrofitBuilder: Retrofit.Builder): Retrofit = retrofitBuilder.baseUrl(BASE_URL).build()
 
     @Provides
     @Singleton
