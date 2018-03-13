@@ -7,8 +7,3 @@ data class BikeShareCity(val href: String,
                          val id: String,
                          val location: Location,
                          val name: String)
-
-data class Location(val city: String,
-                    val country: String,
-                    val latitude: Double,
-                    val longitude: Double)

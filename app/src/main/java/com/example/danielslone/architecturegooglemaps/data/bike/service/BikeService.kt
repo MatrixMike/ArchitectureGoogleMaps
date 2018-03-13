@@ -17,6 +17,10 @@ import javax.inject.Inject
  */
 class BikeService @Inject constructor(retrofit: Retrofit) : BikeRepository {
 
+    private companion object {
+        val FILE_NAME = "BikeService"
+    }
+
     private val client: BikeClient
 
     init {
@@ -24,12 +28,11 @@ class BikeService @Inject constructor(retrofit: Retrofit) : BikeRepository {
     }
 
     override fun getBikeShareCities(): Single<List<BikeShareCity>> {
-        Log.d("bike service", "bike service")
         return client.getBikeShareCities()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .map { mapToNetworks(it) }
-                .doOnError{ Log.d("bike service", it.message.toString()) }
+                .doOnError{ Log.d(FILE_NAME, it.message.toString()) }
     }
 
     private interface BikeClient {
