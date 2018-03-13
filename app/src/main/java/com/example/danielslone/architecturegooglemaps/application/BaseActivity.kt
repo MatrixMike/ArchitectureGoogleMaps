@@ -7,7 +7,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.danielslone.architecturegooglemaps.application.injection.component.ActivityComponent
 import com.example.danielslone.architecturegooglemaps.application.injection.component.DaggerActivityComponent
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 /**
  * Created by danielslone on 2/23/18.
@@ -33,10 +32,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
 
         presenter.onStart()
-    }
-
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
     }
 
     override fun onPause() {
